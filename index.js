@@ -9,13 +9,15 @@ dotenv.config()
 // simply mongodb installed
 const mongodb = require('mongodb')
 const mongoClient = mongodb.MongoClient
-const objectID = mongodb.ObjectID
+// const objectID = mongodb.ObjectID
 
-const dbURL = 'mongodb+srv://MONIKA20:haachihaachi@cluster0.0saeo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+const dbURL = process.env.dbURL
 
 const app = express()
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+    origin:"https://e-learning-application.netlify.app/"
+}))
 
 const port = process.env.PORT || 5000
 app.listen(port, () => console.log('your app is running wonderfully at', port))
@@ -27,6 +29,7 @@ app.get('/', (req, res) => {
 app.post('/register',   async (req, res) => {
     try{
     const client = await mongoClient.connect(dbURL);
+    console.log("DB connected successfully!!")
     const db = client.db('Records');
     const data = await db.collection('users').findOne({ email: req.body.email });
       if (data) {
