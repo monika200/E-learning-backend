@@ -1,1 +1,1 @@
-[LIVEDEMO](https://e-learning-platform-app.herokuapp.com/)
+[LIVEDEMO](https://e-learning-portal-app.herokuapp.com/)
